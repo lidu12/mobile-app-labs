@@ -133,10 +133,10 @@ String summarise(Object? value) {
     double() => 'a decimal number',
 
     // 4. If the type is a String, bind it to variable 's' to read its length
-    String s => '"$s" has ${s.length} characters',
-
+    final String s => '"$s" has ${s.length} characters',
+    
     // 5. If the type is a Map, bind it to variable 'm' to read its entry count
-    Map m => 'a map with ${m.length} entries',
+   final Map<Object?, Object?> m => 'a map with ${m.length} entries',
 
     // 6. Default fallback for any other type
     _ => 'unknown',
