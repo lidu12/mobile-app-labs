@@ -95,16 +95,50 @@ double convertDistance(double value, {bool toKilometres = false}) {
   return double.parse(roundedText);
 }
 List<int> fibonacci(int count) {
-  // TODO(lab): Exercise 7
-  throw UnimplementedError();
-}
+  // 1. Edge case: if count is 0 or negative, return an empty list
+  if (count <= 0) {
+    return [];
+  }
 
-/// Summarises a value that may be null or of any type:
-/// null → 'no value', true → 'yes', false → 'no',
-/// a double → 'a decimal number', a String → '"hi" has 2 characters',
-/// a Map → 'a map with 3 entries', anything else → 'unknown'.
+  // 2. Edge case: if only 1 number is requested, return [0]
+  if (count == 1) {
+    return [0];
+  }
+
+  // 3. Start the list with the first two base Fibonacci numbers: 0 and 1
+  final list = <int>[0, 1];
+
+  // 4. Keep adding numbers until the list has reached 'count' items
+  while (list.length < count) {
+    // Add the last number and the second-to-last number together
+    final nextNumber = list[list.length - 1] + list[list.length - 2];
+    
+    // Append the new number to the end of our list
+    list.add(nextNumber);
+  }
+
+  // 5. Return the completed list
+  return list;
+}
 String summarise(Object? value) {
-  // TODO(lab): Exercise 8 — similar example: describe. Use a `switch`
-  // with type patterns.
-  throw UnimplementedError();
+  return switch (value) {
+    // 1. If the value is null
+    null => 'no value',
+
+    // 2. Exact boolean values
+    true => 'yes',
+    false => 'no',
+
+    // 3. If the type is a double (decimal number)
+    double() => 'a decimal number',
+
+    // 4. If the type is a String, bind it to variable 's' to read its length
+    String s => '"$s" has ${s.length} characters',
+
+    // 5. If the type is a Map, bind it to variable 'm' to read its entry count
+    Map m => 'a map with ${m.length} entries',
+
+    // 6. Default fallback for any other type
+    _ => 'unknown',
+  };
 }
