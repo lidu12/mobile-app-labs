@@ -15,9 +15,17 @@ void main() {
     expect(find.text('Check-ins today: 1'), findsOneWidget);
   });
 
-  // TODO(lab): Task 2 — write this test first, before the FAB works, and
-  // run it to see it fail. Pump HomeScreen, tap the FloatingActionButton
-  // three times, and expect the text 'Check-ins today: 3'.
+    testWidgets('three taps on the FAB show three check-ins', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+
+    for (var i = 0; i < 3; i++) {
+      await tester.tap(find.byType(FloatingActionButton));
+    }
+    await tester.pump();
+
+    expect(find.text('Check-ins today: 3'), findsOneWidget);
+  });
+
 
   testWidgets('the lifecycle logger is mounted only while the switch is on',
       (tester) async {
